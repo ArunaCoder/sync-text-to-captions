@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtitle Sync Tool (Text-to-Text)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Subtitle Sync Tool (Text-to-Text) v4</h1>
+
+
+    <div class="container">
+        <div class="input-section">
+            <h2>Input</h2>
+            <div class="input-group">
+                <label for="subtitleFile">1. Upload the original subtitle file (SRT, SBV or VTT):</label>
+                <input type="file" id="subtitleFile" accept=".srt,.sbv,.vtt">
+            </div>
+            <div class="input-group">
+                <label for="revisedText">2. Paste the revised/translated text:</label>
+                <textarea id="revisedText" rows="10" placeholder="Paste here the full text you revised or translated..."></textarea>
+            </div>
+            <button id="syncButton">Sync</button>
+        </div>
+
+        <div class="status-section">
+            <h2>Status</h2>
+            <div id="progressBarContainer" style="display: none;">
+                <progress id="progressBar" value="0" max="100"></progress>
+            </div>
+            <p id="statusMessage">Waiting for files...</p>
+            <p id="matchingScoreDisplay" style="display: none;">Match Score: --%</p>
+        </div>
+
+        <div class="output-section" style="display: none;">
+            <h2>Sync Result</h2>
+            <p>Compare and edit the result in the right column. The original content is on the left.</p>
+            <div class="comparison-area">
+                <div class="column">
+                    <h3>Original Subtitle</h3>
+                    <pre id="originalSrtDisplay"></pre>
+                </div>
+                <div class="column">
+                    <h3>Revised Subtitle (Editable)</h3>
+                    <textarea id="revisedSrtDisplay" rows="20"></textarea>
+                </div>
+            </div>
+            <button id="downloadButton">Download Revised Subtitle</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
