@@ -708,6 +708,29 @@ function handleSync() {
                     revisedSegments[0] = missingPrefix.join(" ") + " " + revisedSegments[0];
                 }
 
+                // Attempt to recover missing final words by checking if the last part of the revised text was dropped
+                const finalSyncedWords = revisedSegments.join(" ").split(" ").filter(Boolean);
+                const finalSyncedClean = finalSyncedWords.map(cleanForComparison);
+
+                // Collect tail words that appear after the alignment ends
+                const missingTail = [];
+
+                for (let i = finalSyncedWords.length; i < revisedWords.length; i++) {
+                    const word = revisedWords[i];
+                    const cleaned = cleanForComparison(word);
+
+                    // Avoid duplication: only add if not already in synced result
+                    if (!finalSyncedClean.includes(cleaned)) {
+                        missingTail.push(word);
+                    }
+                }
+
+                // Manually append missing tail to the last segment
+                if (missingTail.length > 0) {
+                    revisedSegments[revisedSegments.length - 1] += " " + missingTail.join(" ");
+                }
+
+
                 // Calculate similarity score for diagnostic purposes
                 let matched = 0;
                 for (let i = 0; i < Math.min(revisedWords.length, finalWords.length); i++) {
