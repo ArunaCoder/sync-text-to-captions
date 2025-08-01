@@ -11,7 +11,7 @@ const originalSrtDisplay = document.getElementById("originalSrtDisplay");
 const revisedSrtDisplay = document.getElementById("revisedSrtDisplay");
 const downloadButton = document.getElementById("downloadButton");
 
-// --- State Variables ---
+// --- State Variables ----
 let originalSubtitleContent = "";
 let originalSubtitleFileName = "original.srt";
 let originalSubtitleFormat = "srt";
